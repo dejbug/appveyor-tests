@@ -1,5 +1,6 @@
-IF NOT EXIST build MKDIR build
-python src\print_file_system_info.py > build\print_file_system_info.out.txt
+REM IF NOT EXIST build MKDIR build
+REM python src\print_file_system_info.py > build\print_file_system_info.out.txt
+cinst winflexbison
 
 EXIT
 
