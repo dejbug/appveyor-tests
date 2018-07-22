@@ -1,29 +1,15 @@
-# Do not build on tags
+version: "{build}"
+
 skip_tags: true
-
-# We don't need tests right now.
 test: off
+max_jobs: 1
 
-# The standard flow calls msbuild.exe. We need to
-# overwrite this default behavior here.
 build_script:
-  - cmd: call appveyor.bat
+  - cmd: python test.py
+  - cmd: which make
+  - cmd: which mingw32-make
+  - cmd: mingw32-make --version | head -1
+  - cmd: g++ --version | head -1
+  - cmd: 7z --help | head -3
 
-artifacts:
-  # Push the entire "build" folder as a zip
-  - path: build
-
-deploy:
-  # Deploy to GitHub Releases
-  - provider: GitHub
-    auth_token:
-      secure: GlPci9QnLJxVkwdcLb6l1v0Std1gZw7kj+9Oyg/emy5H8Npnf8w6B9yXMH/DhNq2
-    artifact: deploy\$(appveyor_project_name)-$(appveyor_repo_tag_name).zip
-    draft: false
-    prerelease: true
-    on:
-      branch: master               # release from master branch only
-      appveyor_repo_tag: true      # deploy on tag push only
-
-before_deploy:
-  - cmd: call appveyor.bat
+deploy: off
