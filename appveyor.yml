@@ -8,8 +8,8 @@ install:
   - cmd: FOR /F "delims=" %%a IN ('python appveyor_mingw.py') DO SET MINGW_DIR=%%a
   - cmd: IF "."=="%MINGW_DIR%" ( EXIT 404 )
   - cmd: DIR %MINGW_DIR%
-  - cmd: EXIT 2
-  - cmd: SET PATH=%MINGW_DIR%\mingw32\bin;%PATH%
+  - cmd: DIR c:\mingw-w32
+  - cmd: SET PATH=%MINGW_DIR%\mingw64\bin;%PATH%
 
 before_build:
   - cmd: mingw32-make --version | head -1
