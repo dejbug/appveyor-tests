@@ -5,13 +5,6 @@ test: off
 max_jobs: 1
 
 build_script:
-  - cmd: IF EXIST C:\mingw-w64 DIR C:\mingw-w64
-  - cmd: which gcc
-  - cmd: python test.py
-  - cmd: which make
-  - cmd: which mingw32-make
-  - cmd: mingw32-make --version | head -1
-  - cmd: g++ --version | head -1
-  - cmd: 7z --help | head -3
+  - cmd: python appveyor_mingw.py
 
 deploy: off
