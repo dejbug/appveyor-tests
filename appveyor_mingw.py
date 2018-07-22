@@ -64,3 +64,6 @@ if "__main__" == __name__:
 	version = get_highest_version()
 	if version:
 		print version.path
+	else:
+		print "."
+		exit(1)
