@@ -4,9 +4,17 @@ skip_tags: true
 test: off
 max_jobs: 1
 
+install:
+  - cmd: FOR /F "delims=" %%a IN ('python appveyor_mingw.py') DO SET MINGW_DIR=%%a
+  - cmd: IF "."=="%MINGW_DIR%" ( EXIT 404 )
+  - cmd: SET PATH=%MINGW_DIR%\mingw32\bin;%PATH%
+
+before_build:
+  - cmd: mingw32-make --version | head -1
+  - cmd: g++ --version | head -1
+  - cmd: 7z --help | head -3
+
 build_script:
-  - cmd: echo %MINGW_DIR%
-  - cmd: for /f "delims=" %%a in ('python appveyor_mingw.py') do set MINGW_DIR=%%a
-  - cmd: echo %MINGW_DIR%
+  - cmd: mingw32-make -j1 --keep-going
 
 deploy: off
